@@ -4,7 +4,7 @@ import json
 
 app=Flask(__name__)
 camera=cv2.VideoCapture(0)
-response = """{
+jsondata = """{
     "faces": [
         {
             "name": "abc xyz", 
@@ -34,32 +34,23 @@ def generate_frames():
            if not success:
                break
            else:
-               response1 = json.loads(response)
-               for doc in response1['faces']:
-                   print(f"Person detected: {doc['name']}")
-                   top_left, top_right, bottom_right, bottom_left = doc['bbox']
-                    # Drawing bounding box
-                   cv2.rectangle(frame, top_left, bottom_right, (0, 255, 0), 2)
-                   # Drawing name
-                  # cv2.putText(frame, doc['name'], cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 0), 2)
-
-               #  faces=json.loads(jsondata)
-               #  print(type(faces))
+                 faces=json.loads(jsondata)
+                 print(type(faces))
                 # print(faces)
                 #detector=cv2.CascadeClassifier('Haarcascades/haarcascade_frontalface_default.xml')
  
                  #faces=detector.detectMultiScale(frame,1.1,7)
  
-                # for (x, y, w, h) in faces:
-                #     cv2.rectangle(frame, (x, y), (x+w, y+h), (255, 0, 0), 2)
+                 for (x, y, w, h) in faces:
+                     cv2.rectangle(frame, (x, y), (x+w, y+h), (255, 0, 0), 2)
                   
                 # for a in faces['faces']:
                 #    print(a)
 
     
-                   ret,buffer=cv2.imencode('.jpg',frame)
-                   frame=buffer.tobytes()
-                   yield(b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
+                 ret,buffer=cv2.imencode('.jpg',frame)
+                 frame=buffer.tobytes()
+                 yield(b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
    
 
 @app.route('/')
