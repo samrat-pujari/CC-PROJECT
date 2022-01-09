@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="../static/style.css" />
+    <title>CC-Course Project </title>
+  </head>
+  <body>
+    <div class="container">
+        
+      
+      <h1> Realtime Environment Monitoring</h1>
+     
+      <br>
+        <input type="checkbox" name="function" id="FR" onclick="">
+        <label for="FR">Facial Recognition</label>
+        <br>        
+        <input type="checkbox" name="function" id="TR" onclick="">
+        <label for="TR">Language Translation</label>
+        
+        
+        <div id="text" >
+            <div class="form-group">
+            <h3>Select Language</h3>
+            <select name="Language">
+                <option value="english">English</option>
+                <option value="hindi">Hindi</option>
+                <option value="marathi">Marathi</option>            
+            </select>
+            </div>
+        
+            
+            <input type="submit" value="Submit" class="btn" />
+        </div>
+
+
+
+        <div id="face">
+            
+            <div class="form-group">
+                <img src="{{url_for('video')}}" width=50%/>
+            </div>
+            
+
+        </div>
+    </div>
+  </body>
+</html>
